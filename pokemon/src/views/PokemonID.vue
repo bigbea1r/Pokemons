@@ -1,8 +1,4 @@
 <template>
-    <div class="home">
-        <input type="text" id="searchInput">
-    <button type="button" @click="search">Найти</button>
-  </div>
   <div id="searchResults">
       <h1 v-for="item in searchResults" :key="item.name">{{ item.name }}</h1>
   </div>
@@ -21,33 +17,30 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get('https://pokeapi.co/api/v2/pokemon/1') //${pokemon_id}
+    this.$axios.get('https://pokeapi.co/api/v2/pokemon/')
       .then(response => {
         this.searchResults = response.data.results;
-        let data = response.data.moves;
-        console.log(data)
       })
       .catch(error => {
         console.error(error);
       })
-      
   },
   methods: {
     search() {
-      var searchText = document.querySelector('#searchInput').value;
+      //var searchText = document.querySelector('#searchInput').value;
 
       // Фильтруем результаты поиска
-      this.searchResults = this.searchResults.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()));
+      this.searchResults = this.searchResults.filter(item => item.name.toLowerCase().includes.toLowerCase());
 
       // Очищаем поле ввода после поиска
-      document.querySelector('#searchInput').value = '';
-      document.querySelector('#searchResults').style.display  = 'block';
+      //document.querySelector('#searchInput').value = '';
     }
   }
 }
+
 </script>
 <style>
 #searchResults{
-    display: none;
+    display: block;
 }
 </style>

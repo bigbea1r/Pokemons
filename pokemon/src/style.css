@@ -101,7 +101,7 @@ button:focus-visible {
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 20px #646cffaa);
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
@@ -119,7 +119,7 @@ body{
   height: 40px;
 }
 .route-obj{
-  width: 30%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: space-around;
