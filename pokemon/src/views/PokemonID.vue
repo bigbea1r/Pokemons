@@ -1,6 +1,11 @@
 <template>
-  <div id="searchResults">
-      <h1 v-for="item in searchResults" :key="item.name">{{ item.name }}</h1>
+  <div v-on:click="search" id="searchResults">
+    <h1 v-for="item in searchResults" :key="item.name">{{ item.name }}</h1>
+    <img v-bind:src="img" alt="">
+    <p>Рост: <span>{{ height }} дюймов</span></p>
+    <p>Вес: <span>{{ weight }} фунтов</span></p>
+    <p>Тип атаки: <span>{{ charge }}</span></p>
+    <p>Уровень: <span>{{ experience }}</span></p>
   </div>
 </template>
 
@@ -9,38 +14,37 @@ export default {
   data() {
     return {
       searchResults: [],
-      postData: {
-        userId: '',
-        title:  '',
-        body:   ''
-      }
     }
   },
   mounted() {
-    this.$axios.get('https://pokeapi.co/api/v2/pokemon/')
-      .then(response => {
-        this.searchResults = response.data.results;
-      })
-      .catch(error => {
-        console.error(error);
-      })
+    this.getPokemonById();
+  },
+  watch: {
+    '$route.params.id': function() {
+      this.getPokemonById();
+    },
   },
   methods: {
     search() {
-      //var searchText = document.querySelector('#searchInput').value;
-
-      // Фильтруем результаты поиска
-      this.searchResults = this.searchResults.filter(item => item.name.toLowerCase().includes.toLowerCase());
-
-      // Очищаем поле ввода после поиска
-      //document.querySelector('#searchInput').value = '';
-    }
-  }
+      this.$router.push(`/pokemon/${this.pokemon_id}`);
+    },
+    getPokemonById() {
+      const pokemonId = this.$route.params.id;
+      if (pokemonId) {
+        this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+          .then(response => {
+            this.searchResults = response.data;
+            this.experience = response.data.base_experience;
+            this.charge = response.data.types[0].type.name;
+            this.height = response.data.height;
+            this.weight = response.data.weight;
+            this.img = response.data.sprites.front_default;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    },
+  },
 }
-
 </script>
-<!-- <style>
-#searchResults{
-    display: block;
-}
-</style> -->

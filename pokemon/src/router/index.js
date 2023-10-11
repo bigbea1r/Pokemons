@@ -7,7 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     { path: '/', name: 'Home', component: Home },
     { path: '/terms-of-use', name: 'TermsOfUse', component: TermsOfUse },
-    { path: '/{pokemon_id}', name: 'Pokemon_ID', component: Pokemon_ID },
+    { path: '/pokemon/:id', component: Pokemon_ID, props: true },
     { path: '/pokemon', name: 'Pokemon', component: Pokemon },
 ]
 
