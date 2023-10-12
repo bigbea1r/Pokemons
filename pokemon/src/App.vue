@@ -4,7 +4,7 @@
     
      <div class="route-obj">
       <router-link to="/"><img src="/pokemon-23.svg" class="logo" alt="Pokemon logo" /></router-link> 
-      <router-link to="/pokemon">Pokemon</router-link> 
+      <router-link to="/pokemon/:id">Pokemon ID</router-link> 
       <router-link to="/terms-of-use">Terms of use</router-link> 
      </div>
   </div>

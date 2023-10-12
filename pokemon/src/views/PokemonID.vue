@@ -18,6 +18,7 @@ export default {
   },
   mounted() {
     this.getPokemonById();
+    this.getPokemonName();
   },
   watch: {
     '$route.params.id': function() {
@@ -28,7 +29,10 @@ export default {
     search() {
       this.$router.push(`/pokemon/${this.pokemon_id}`);
     },
-    getPokemonById() {
+    getPokemonById(){
+    this.pokemon_id = Math.floor(Math.random() * 1018);
+    },
+    getPokemonName() {
       const pokemonId = this.$route.params.id;
       if (pokemonId) {
         this.$axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
